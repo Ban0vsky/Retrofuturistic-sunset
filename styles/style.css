@@ -217,7 +217,7 @@ body{
   margin-bottom: 40px;
   border: solid 2px  #00ff00;
   box-shadow: 0 0 8px #00ff00, inset 0 0 8px #00ff00;
-  -webkit-animation: pulse 2s linear 1s infinite;
+  animation: pulse 2s linear 1s infinite;
   background-color: #00ff00;
   text-align: center
 }
@@ -273,7 +273,7 @@ body{
   justify-content: center;
   align-items: center;
   box-shadow: 0 0 8px #00ff00, inset 0 0 8px #00ff00;
-  -webkit-animation: pulse 2s linear 1s infinite;
+  animation: pulse 2s linear 1s infinite;
   will-change: transform;
 
 }
@@ -309,7 +309,7 @@ body{
   border: solid 2px  #00ff00;
   transform: translatex(-18px) translateZ(-17px) rotateY(90deg);
   box-shadow: 0 0 8px #00ff00, inset 0 0 8px #00ff00;
-  -webkit-animation: pulse 2s linear 1s infinite;
+  animation: pulse 2s linear 1s infinite;
   will-change: transform;
 
 
@@ -321,7 +321,7 @@ body{
   border: solid 2px  #00ff00;
   transform: translatex(395px) translateZ(-18px) rotateY(90deg);
   box-shadow: 0 0 8px #00ff00, inset 0 0 8px #00ff00;
-  -webkit-animation: pulse 2s linear 1s infinite;
+  animation: pulse 2s linear 1s infinite;
   will-change: transform;
 
 
@@ -334,7 +334,7 @@ body{
   border: solid 2px  #00ff00;
   transform: rotate(90deg) rotateY(90deg) translatey(-187px) translatex(17px) translatez(-400px);
   box-shadow: 0 0 8px #00ff00, inset 0 0 8px #00ff00;
-  -webkit-animation: pulse 2s linear 1s infinite;
+  animation: pulse 2s linear 1s infinite;
   will-change: transform;
 
 }
@@ -346,7 +346,7 @@ body{
   border: solid 2px  #00ff00;
   transform: rotate(90deg) rotateY(90deg) translatey(-180px) translatex(17px) translatez(400px);
   box-shadow: 0 0 8px #00ff00, inset 0 0 8px #00ff00;
-  -webkit-animation: pulse 2s linear 1s infinite;
+  animation: pulse 2s linear 1s infinite;
   will-change: transform;
 
 
@@ -358,9 +358,8 @@ body{
   height: 47px;
   border: solid 2px  #00ff00;
   box-shadow: 0 0 8px #00ff00, inset 0 0 8px #00ff00;
-  -webkit-animation: pulse 2s linear 1s infinite;
   position: absolute;
-  -webkit-animation: pulse 2s linear 1s infinite;
+  animation: pulse 2s linear 1s infinite;
   will-change: transform;
 
 }
@@ -916,11 +915,9 @@ h1{
 
 #tv{
   position: absolute;
-	-webkit-transform: translate3d(0, 0, 0);
-	-moz-transform: translate3d(0, 0, 0);
 	transform: translate3d(0, 0, 0);
-	-webkit-backface-visibility: hidden;
-  -webkit-perspective: 1000;
+	backface-visibility: hidden;
+  perspective: 1000;
   width: 375px;
   height: 667px;
 }

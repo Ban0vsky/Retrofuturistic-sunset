@@ -3,13 +3,13 @@
 
 	var canvas = document.querySelector("#tv"),
 		context = canvas.getContext("gl") || canvas.getContext("2d"),
-		scaleFactor = 2.5, // Noise size
+		scaleFactor = 2.5,
 		samples = [],
 		sampleIndex = 0,
 		scanOffsetY = 0,
 		scanSize = 0,
 		FPS = 50,
-		scanSpeed = FPS * 15, // 15 seconds from top to bottom
+		scanSpeed = FPS * 15,
 		SAMPLE_COUNT = 10;
 
 	window.onresize = function() {
@@ -46,7 +46,6 @@
 		for(var i = 0; i < (w * h); i++) {
 			var k = i * 4;
 			var color = Math.floor(36 * Math.random());
-			// Optional: add an intensity curve to try to simulate scan lines
 			color += intensity[Math.floor(i / w)];
 			imageData.data[k] = imageData.data[k + 1] = imageData.data[k + 2] = color;
 			imageData.data[k + 3] = Math.round(255 * trans);
@@ -57,7 +56,7 @@
 	function render() {
 		context.putImageData(samples[Math.floor(sampleIndex)], 0, 0);
 
-		sampleIndex += 20 / FPS; // 1/FPS == 1 second
+		sampleIndex += 20 / FPS;
 		if(sampleIndex >= samples.length) sampleIndex = 0;
 
 		var grd = context.createLinearGradient(0, scanOffsetY, 0, scanSize + scanOffsetY);
@@ -70,7 +69,6 @@
 		grd.addColorStop(0.5, 'rgba(255,255,255,1.0)');
 		grd.addColorStop(0.55, 'rgba(255,255,255,0.55)');
 		grd.addColorStop(0.6, 'rgba(255,255,255,0.25)');
-		//grd.addColorStop(0.8, 'rgba(255,255,255,0.15)');
 		grd.addColorStop(1, 'rgba(255,255,255,0)');
 
 		context.fillStyle = grd;
