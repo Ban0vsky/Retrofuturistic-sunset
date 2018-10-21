@@ -20,6 +20,7 @@ Une fois réalisés, je les ai intégré au code de base et je les ai animé "à
 
 OPTIMISATION:
 Je me suis débrouillé avec les will-change pour avoir un minimum de paint possible. Finalement, je n'ai qu'un élément qui paint en permanence et le reste ne bouge pas. Sur ma machine moyenne de gamme (i5 2500k et r9 290) je suis quasiment en 60fps constant. 
+J'ai aussi laissé plusieurs transform à 0 présents dans le code, c'est un moyen pour moi de changer rapiidement les valeurs et d'avoir un rendu instantanné quand je modélise des choses en 3d en css.
 
 
 BUGS:
