@@ -232,10 +232,10 @@ body{
 /**PHONE STYLE**/
 .phone{
   transform-style: preserve-3d;
-  transform: rotatex(0deg) rotateY(0deg) rotate(0deg) translateZ(350px);
+  transform: rotatex(0deg) rotateY(0deg) rotate(0deg) translateZ(-150px);
   display: flex;
   align-items: center;
-  animation: phone-hover 8s linear infinite;
+  /* animation: phone-hover 8s linear infinite; */
   will-change: transform;
   z-index: 1000;
   position:absolute;
@@ -255,7 +255,7 @@ body{
   transform-style: preserve-3d;
   z-index: 5;
   box-shadow: 0 0 8px #00ff00, inset 0 0 8px #00ff00;
-  -webkit-animation: pulse 2s linear 1s infinite;
+  animation: pulse 2s linear 1s infinite;
   will-change: transform;
 }
 
@@ -483,6 +483,34 @@ body{
 
 }
 
+.bars{
+  transform: translateY(-17px)
+}
+.completedBars{
+  height: 15px;
+  width: 245px;
+  border: solid #00ff00 2px;
+  margin-bottom:5px; 
+  margin-left: 5px;
+  overflow: hidden;
+}
+
+.loadingBars{
+  height: 15px;
+  width: 245px;
+  background-color: #00ff00;
+}
+
+.bar1{
+  animation: barLoading 99s linear infinite;
+}
+.bar2{
+  animation: barLoading 145s linear infinite;
+}
+.bar3{
+  animation: barLoading 60s linear infinite;
+}
+
 .text{
  z-index: 3000;
  font-family: 'VT323', monospace;
@@ -502,24 +530,40 @@ h1{
 
 /**TEXT STYLE**/
 .titles{
-  color: rgb(199, 0, 0);
-  font-family: 'Nanum Gothic', sans-serif;
+  color: white;
+  font-family: 'VT323', monospace;
   font-size: 20pt;
   margin-left: 10px;
   margin-top: 8px;
-  animation: titles-animation linear 1s infinite;
   will-change: transform;
 
 }
 
 .margin p{
   transform: rotate(90deg);
-  color: rgb(197, 0, 0);
+  font-size: 40pt;
+  color: white;
   white-space: nowrap;
-  font-family: 'Nanum Gothic', sans-serif;
+  font-family: 'VT323', monospace;;
   margin-top: 50px;
   will-change: transform;
 
+}
+
+.element p{
+  font-size: 30pt;
+  color: white;
+  font-family: 'VT323', monospace;
+  will-change: transform;
+  margin-top: 0px;
+}
+
+.insideSystem p{
+  font-size: 40pt;
+  color: white;
+  font-family: 'VT323', monospace;
+  will-change: transform;
+  margin-top: -20px;
 }
 
 .latlon{
@@ -590,7 +634,7 @@ h1{
   position: absolute;
   border: rgb(0, 0, 0) solid 1px;
   border-radius: 100%;
-  background-color: rgb(0, 63, 26);
+  background-color: rgb(0, 236, 0);
   transform-style: preserve-3d;
 }
 
@@ -599,7 +643,7 @@ h1{
   .lineFirstFloor .lineOne{
     width: 1px;
     height: 35px;
-    background-color: rgb(0, 63, 26);
+    background-color: rgb(0, 236, 0);
     transform: rotatex(85deg) skew(12deg) translatey(18px) translateZ(44px);
     position: absolute;
   }
@@ -607,7 +651,7 @@ h1{
   .lineFirstFloor .lineTwo{
     width: 1px;
     height: 35px;
-    background-color: rgb(0, 63, 26);
+    background-color: rgb(0, 236, 0);
     transform: rotatex(95deg) skew(12deg) translatey(18px) translateZ(-9px);
     position: absolute;
   }
@@ -615,7 +659,7 @@ h1{
   .lineFirstFloor .lineThree{
     width: 1px;
     height: 35px;
-    background-color: rgb(0, 63, 26);
+    background-color: rgb(0, 236, 0);
     transform: rotatex(90deg) skew(11deg) translatey(18px) translatex(25px) translateZ(16px) rotateY(90deg);
     position: absolute;
   }
@@ -623,7 +667,7 @@ h1{
   .lineFirstFloor .lineFour{
     width: 1px;
     height: 35px;
-    background-color: rgb(0, 63, 26);
+    background-color: rgb(0, 236, 0);
     transform: rotatex(90deg) skew(15deg) translatey(18px) translatex(-25px) translateZ(16px) rotateY(90deg);
     position: absolute;
   }
@@ -645,7 +689,7 @@ h1{
   .lineSecondFloor .lineOne{
     width: 1px;
     height: 70px;
-    background-color: rgb(0, 63, 26);
+    background-color: rgb(0, 236, 0);
     transform: rotatex(96deg) skew(11deg) translatey(36px) translateZ(8px) rotate(0deg);
     position: absolute;
   }
@@ -653,7 +697,7 @@ h1{
   .lineSecondFloor .lineTwo{
     width: 1px;
     height: 70px;
-    background-color: rgb(0, 63, 26);
+    background-color: rgb(0, 236, 0);
     transform: rotatex(83deg) skew(11deg) translatey(28px) translateZ(62px);
     position: absolute;
   }
@@ -661,7 +705,7 @@ h1{
   .lineSecondFloor .lineThree{
     width: 1px;
     height: 70px;
-    background-color: rgb(0, 63, 26);
+    background-color: rgb(0, 236, 0);
     transform: rotatex(90deg) skew(4deg) translatey(35px) translatex(27px) translateZ(34px) rotateY(90deg);
     position: absolute;
   }
@@ -669,7 +713,7 @@ h1{
   .lineSecondFloor .lineFour{
     width: 1px;
     height: 70px;
-    background-color: rgb(0, 63, 26);
+    background-color: rgb(0, 236, 0);
     transform: rotatex(90deg) skew(17deg) translatey(35px) translatex(-27px) translateZ(34px) rotateY(90deg);
     position: absolute;
   }
@@ -691,7 +735,7 @@ h1{
   .lineThirdFloor .lineOne{
     width: 1px;
     height: 107px;
-    background-color: rgb(0, 63, 26);
+    background-color: rgb(0, 236, 0);
     transform: rotatex(99deg) skew(7deg) translatey(57px) translateZ(25px) rotate(0deg);
     position: absolute;
   }
@@ -699,7 +743,7 @@ h1{
   .lineThirdFloor .lineTwo{
     width: 1px;
     height: 107px;
-    background-color:rgb(0, 63, 26);
+    background-color:rgb(0, 236, 0);
     transform: rotatex(80deg) skew(6deg) translatey(39px) translateZ(80px);
     position: absolute;
   }
@@ -707,7 +751,7 @@ h1{
   .lineThirdFloor .lineThree{
     width: 1px;
     height: 105px;
-    background-color: rgb(0, 63, 26);
+    background-color: rgb(0, 236, 0);
     transform: rotatex(90deg) skew(-3deg) translatey(53px) translatex(27px) translateZ(53px) rotateY(90deg);
     position: absolute;
   }
@@ -715,7 +759,7 @@ h1{
   .lineThirdFloor .lineFour{
     width: 1px;
     height: 105px;
-    background-color: rgb(0, 63, 26);
+    background-color: rgb(0, 236, 0);
     transform: rotatex(90deg) skew(15deg) translatey(53px) translatex(-27px) translateZ(51px) rotateY(90deg);
     position: absolute;
   }
@@ -727,7 +771,7 @@ h1{
   .centerLine{
     width: 500px;
     height: 100px;
-    border-top: solid 5px rgb(0, 63, 26);
+    border-top: solid 5px rgb(0, 236, 0);
     border-radius: 65%/30px 111px 0 0;
     transform: rotate(0deg) rotatex(90deg) rotatey(0deg);
     transform-style: preserve-3d;
@@ -737,7 +781,7 @@ h1{
     height: 45px;
     width: 25px;
     display: inline-block;
-    border: solid 3px rgb(0, 63, 26);
+    border: solid 3px rgb(0, 236, 0);
     transform-origin: top left;
   }
 
@@ -947,6 +991,10 @@ h1{
   100% { box-shadow:0 0 8px #003b14, inset 0 0 8px #003b14; }
 } */
 
+@keyframes barLoading{
+  0%{transform:translatex(-240px)}
+  100%{transform:translatex(0px)}
+}
 
 #tv{
   position: absolute;
@@ -958,3 +1006,4 @@ h1{
   width: 375px;
   height: 667px;
 }
+
