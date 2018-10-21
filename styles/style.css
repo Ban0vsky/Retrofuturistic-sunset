@@ -6,7 +6,7 @@ body{
   margin: 0px;
   padding: 0px;
   /* background-color: black; */
-
+  cursor: none;
 }
 .thiccDiv{
   height: 100%;
@@ -19,6 +19,18 @@ body{
   transform-style: preserve-3d;
   perspective: 800px
 }
+
+#aesthetic{
+  position: absolute;
+  z-index: 10000;
+  font-size: 30px;
+  color: white;
+  font-family: 'VT323', monospace;
+  background-color: black;
+  padding: 15px 20px;
+  user-select: none;
+}
+
 /*******SKY STYLING*******/
 
 .retroSky{
@@ -230,9 +242,9 @@ body{
 
 
 /**PHONE STYLE**/
-.phone{
+#phone{
   transform-style: preserve-3d;
-  transform: rotatex(0deg) rotateY(0deg) rotate(0deg) translateZ(-150px);
+  transform: rotatex(0deg) rotateY(0deg) rotate(0deg) translateZ(-350px);
   display: flex;
   align-items: center;
   /* animation: phone-hover 8s linear infinite; */
@@ -242,7 +254,7 @@ body{
   will-change: transform;
 }
 
-.phone .front{
+#phone .front{
   /* background-image: linear-gradient(rgb(17, 17, 17),rgb(59, 59, 59)); */
   height: 800px;
   width: 410px;
@@ -297,7 +309,7 @@ body{
 
 }
 
-.phone .back{
+#phone .back{
   height: 800px;
   width: 410px;
   /* background-color: rgb(17, 17, 17); */
@@ -313,7 +325,7 @@ body{
 }
 
 
-.phone .rightSide{
+#phone .rightSide{
   width: 34px;
   height: 750px;
   /* background-color: rgb(17, 17, 17); */
@@ -326,7 +338,7 @@ body{
 
 
 }
-.phone .leftSide{
+#phone .leftSide{
   width: 34px;
   height: 750px;
   /* background-color: rgb(17, 17, 17); */
@@ -340,7 +352,7 @@ body{
 
 }
 
-.phone .topSide{
+#phone .topSide{
   width: 34px;
   height: 370px;
   /* background-color: rgb(17, 17, 17); */
@@ -353,7 +365,7 @@ body{
 
 }
 
-.phone .bottomSide{
+#phone .bottomSide{
   width: 34px;
   height: 370px;
   /* background-color: rgb(17, 17, 17); */
@@ -480,7 +492,32 @@ body{
   border: solid 2px  #00ff00;
   box-shadow: 0 0 8px #00ff00, inset 0 0 8px #00ff00;
   will-change: transform;
+}
 
+
+.app{
+  width: 250px;
+  height: 45px;
+  border: solid 2px #00ff00;
+  z-index: 3000;
+  font-family: 'VT323', monospace;
+  color: white;
+  margin: auto;
+  z-index: 1000;
+  font-size: 40pt;
+}
+
+.app:hover{
+  background-color: black;
+  transition: background-color 0.2s;
+}
+
+.appWrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-10px)
 }
 
 .bars{
@@ -527,6 +564,8 @@ h1{
   z-index: 1000;
   font-size: 40pt;
 }
+
+
 
 /**TEXT STYLE**/
 .titles{
