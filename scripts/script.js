@@ -117,7 +117,7 @@ function updatePosition(Y, X) {
 			${(((Y/body.clientHeight)-gravityPoint)/offset)*spread}px
 		)
 
-		translatez(-150px)
+		translatez(-50px)
 	`
 }
 
