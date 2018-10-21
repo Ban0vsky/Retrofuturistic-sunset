@@ -1,123 +1,87 @@
-const canvas = document.querySelector( 'canvas' );
-const context = canvas.getContext( '2d' );
+(function() {
+	"use strict";
 
-const lines = [];
+	var canvas = document.querySelector("#tv"),
+		context = canvas.getContext("gl") || canvas.getContext("2d"),
+		scaleFactor = 2.5, // Noise size
+		samples = [],
+		sampleIndex = 0,
+		scanOffsetY = 0,
+		scanSize = 0,
+		FPS = 50,
+		scanSpeed = FPS * 15, // 15 seconds from top to bottom
+		SAMPLE_COUNT = 10;
 
-const colors = [
-  [ '#4f3a4b', '#e55256' ],
-  [ '#fff', '#111' ],
-  [ '#e37169', '#26282a' ],
-  [ '#eed87b', '#28292b' ],
-  [ '#0d5b5c', '#e6e6e6' ],
-  [ '#d4e8e1', '#e24c68' ],
-  [ '#fbfc65', '#1666bd' ],
-  [ '#f3c8ed', '#1790d0' ],
-  [ '#111', '#fff' ]
-];
+	window.onresize = function() {
+		canvas.width = canvas.offsetWidth / scaleFactor;
+		canvas.height = canvas.width / (canvas.offsetWidth / canvas.offsetHeight);
+		scanSize = (canvas.offsetHeight / scaleFactor) / 3;
 
-var colorIndex = -1;
+		samples = []
+		for(var i = 0; i < SAMPLE_COUNT; i++)
+			samples.push(generateRandomSample(context, canvas.width, canvas.height));
+	};
 
-var step = 0,
-    width = 0,
-    height = 0;
+	function interpolate(x, x0, y0, x1, y1) {
+		return y0 + (y1 - y0)*((x - x0)/(x1 - x0));
+	}
 
-document.ontouchstart = color;
-document.onmousedown = color;
-window.onresize = setup;
 
-setup();
-color();
-update();
+	function generateRandomSample(context, w, h) {	
+		var intensity = [];
+		var random = 0;
+		var factor = h / 50;
+		var trans = 1 - Math.random() * 0.05;
 
-function setup() {
-  
-  width = window.innerWidth,
-  height = window.innerHeight;
+		var intensityCurve = [];
+		for(var i = 0; i < Math.floor(h / factor) + factor; i++)
+			intensityCurve.push(Math.floor(Math.random() * 15));
 
-  lines.length = 0;
-  
-  let lineCount = height / 26;
-  let pointCount = 14;
-  let spacingH = width / pointCount;
-  let spacingV = height / lineCount;
-  
-  for( let v = 0; v < lineCount; v++ ) {
+		for(var i = 0; i < h; i++) {
+			var value = interpolate((i/factor), Math.floor(i / factor), intensityCurve[Math.floor(i / factor)], Math.floor(i / factor) + 1, intensityCurve[Math.floor(i / factor) + 1]);
+			intensity.push(value);
+		}
 
-    let line = { points: [], ran: 0.2 + Math.random() * 0.7 };
+		var imageData = context.createImageData(w, h);
+		for(var i = 0; i < (w * h); i++) {
+			var k = i * 4;
+			var color = Math.floor(36 * Math.random());
+			// Optional: add an intensity curve to try to simulate scan lines
+			color += intensity[Math.floor(i / w)];
+			imageData.data[k] = imageData.data[k + 1] = imageData.data[k + 2] = color;
+			imageData.data[k + 3] = Math.round(255 * trans);
+		}
+		return imageData;
+	} 
 
-    for( let h = 0; h < pointCount; h++ ) {
-      line.points.push( {
-        nx: h * spacingH,
-        ny: v * spacingV
-      } );
-    }
-    
-    line.points.push( {
-      nx: width + spacingH,
-      ny: v * spacingV
-    } );
-    
-    lines.push( line );
-    
-  }
-  
-}
+	function render() {
+		context.putImageData(samples[Math.floor(sampleIndex)], 0, 0);
 
-function color() {
+		sampleIndex += 20 / FPS; // 1/FPS == 1 second
+		if(sampleIndex >= samples.length) sampleIndex = 0;
 
-  colorIndex = ( ++colorIndex ) % colors.length;
-  canvas.style.backgroundColor = colors[colorIndex][0];
+		var grd = context.createLinearGradient(0, scanOffsetY, 0, scanSize + scanOffsetY);
 
-}
+		grd.addColorStop(0, 'rgba(255,255,255,0)');
+		grd.addColorStop(0.1, 'rgba(255,255,255,0)');
+		grd.addColorStop(0.2, 'rgba(255,255,255,0.2)');
+		grd.addColorStop(0.3, 'rgba(255,255,255,0.0)');
+		grd.addColorStop(0.45, 'rgba(255,255,255,0.1)');
+		grd.addColorStop(0.5, 'rgba(255,255,255,1.0)');
+		grd.addColorStop(0.55, 'rgba(255,255,255,0.55)');
+		grd.addColorStop(0.6, 'rgba(255,255,255,0.25)');
+		//grd.addColorStop(0.8, 'rgba(255,255,255,0.15)');
+		grd.addColorStop(1, 'rgba(255,255,255,0)');
 
-function update() {
+		context.fillStyle = grd;
+		context.fillRect(0, scanOffsetY, canvas.width, scanSize + scanOffsetY);
+		context.globalCompositeOperation = "lighter";
 
-  step += 0.8;
-  
-  canvas.width = width;
-  canvas.height = height;
+		scanOffsetY += (canvas.height / scanSpeed);
+		if(scanOffsetY > canvas.height) scanOffsetY = -(scanSize / 2);
 
-  context.clearRect( 0, 0, width, height );
-  
-  context.lineWidth = 2;
-  context.strokeStyle = colors[colorIndex][1];
-  context.fillStyle = colors[colorIndex][0];
-  
-  lines.forEach( ( line, v ) => {
-    
-    context.beginPath();
-    
-    line.points.forEach( ( point, h ) => {
-      
-      point.x = point.nx,
-      point.y = point.ny + Math.sin( ( point.x * line.ran + ( step + point.ny ) ) / 40 ) * ( 6 + ( point.ny / height * 34 ) );
-      
-    } );
-    
-    line.points.forEach( ( point, h ) => {
-      
-      let nextPoint = line.points[ h + 1 ];
-      
-      if( h === 0 ) {
-        context.moveTo( point.x, point.y );
-      }
-      else if( nextPoint ) {
-        let cpx = point.x + ( nextPoint.x - point.x ) / 2;
-        let cpy = point.y + ( nextPoint.y - point.y ) / 2;
-        context.quadraticCurveTo( point.x, point.y, cpx, cpy );
-      }
-      
-    } );
-    
-    context.stroke();
-    
-    context.lineTo( width, height );
-    context.lineTo( 0, height );
-    context.closePath();
-    context.fill();
-    
-  } );
-
-  requestAnimationFrame( update );
-
-}
+		window.requestAnimationFrame(render);
+	}
+	window.onresize();
+	window.requestAnimationFrame(render);
+})();
